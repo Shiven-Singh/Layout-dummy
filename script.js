@@ -58,16 +58,34 @@
     };
     init();
   })();
-
-  //Switch light/dark
-
-  $("#switch").on("click", function () {
-    if ($("body").hasClass("light")) {
-      $("body").removeClass("light");
-      $("#switch").removeClass("switched");
-    } else {
-      $("body").addClass("light");
-      $("#switch").addClass("switched");
-    }
-  });
 })(jQuery);
+
+$(window).scroll(function () {
+  console.log($(this).scrollTop());
+  $("#b").css({
+    width: $(this).scrollTop(),
+    height: $(this).scrollTop(),
+  });
+  $("#a").css({
+    width: 775 - $(this).scrollTop(),
+    height: 100 - $(this).scrollTop(),
+  });
+});
+
+/* fade-in */
+
+$(document).on("scroll", function () {
+  var pageTop = $(document).scrollTop();
+  var pageBottom = pageTop + $(window).height();
+  var tags = $(".tag");
+
+  for (var i = 0; i < tags.length; i++) {
+    var tag = tags[i];
+
+    if ($(tag).position().top < pageBottom) {
+      $(tag).addClass("visible");
+    } else {
+      $(tag).removeClass("visible");
+    }
+  }
+});
